@@ -1,0 +1,39 @@
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Entorno
+.env
+.env.local
+.env.*.local
+
+# Directorios del sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+*.csv
+
+# Editor / IDE
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+
+# Build (si generas carpetas temporales o de producción)
+dist/
+build/
+coverage/
+
+# Otros temporales
+tmp/
+*.tmp
+
+# Socket.io debug
+debug.log

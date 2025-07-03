@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cyber Pictionary</title>
+  <link rel="stylesheet" href="./style.css" />
+  <script>
+    const token = localStorage.getItem('token');
+    if (!token) {
+      window.location.href = 'login.html';
+    }
+  </script>
+  <script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+</head>
+<body>
+  <header>🎨 Cyber Pictionary</header>
+
+  <div class="container" style="display: flex; gap: 2rem; flex-wrap: wrap;">
+    
+    <!-- Chat en tiempo real -->
+    <div style="flex: 1; min-width: 300px;">
+      <div class="user-list" id="userList">
+        <strong>Jugadores conectados:</strong>
+        <!-- Lista dinámica -->
+      </div>
+
+      <div class="chat-box" id="chat"></div>
+
+      <input id="messageInput" type="text" placeholder="Adivina o comenta..." />
+      <button onclick="enviarMensaje()">Enviar</button>
+    </div>
+
+    <!-- Zona principal del juego -->
+    <div style="flex: 2; min-width: 600px;">
+      <div class="game-area">
+        <h2 id="dibujanteActual">🧑‍🎨 Esperando dibujante...</h2>
+        <div class="canvas-area">
+          <canvas id="canvas"></canvas>
+        </div>
+
+        <!-- Herramientas de dibujo SOLO si eres el dibujante -->
+        <div id="tools" style="display: none; margin-top: 1rem;">
+          <label>Color:</label>
+          <input type="color" id="colorPicker" value="#ffffff" />
+          
+          <label>Tamaño:</label>
+          <input type="range" id="brushSize" min="2" max="10" value="4" />
+          
+          <button onclick="modo = 'pincel'">🖌️ Pincel</button>
+          <button onclick="modo = 'borrador'">🧽 Borrador</button>
+        </div>
+
+        <!-- Adivinanzas recibidas -->
+        <div id="adivinanzas" class="chat-box" style="margin-top: 2rem; display: none;">
+          <strong>❓ Adivinanzas recibidas:</strong>
+          <!-- Se irán agregando -->
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

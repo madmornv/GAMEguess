@@ -1,0 +1,222 @@
+
+/* --- SUPER FUTURISTIC COLORFUL UI --- */
+body {
+    background: linear-gradient(135deg, #0f2027, #2c5364 60%, #ff00cc 100%);
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Orbitron', 'Segoe UI', Arial, sans-serif;
+    color: #fff;
+    overflow-x: hidden;
+    transition: background 0.7s;
+}
+
+header {
+    background: linear-gradient(90deg, #320b35 0%, #010304 100%);
+    box-shadow: 0 4px 32px 0 #00f2fe44;
+    padding: 2rem 0 1rem 0;
+    text-align: center;
+    letter-spacing: 0.2em;
+    font-size: 2.5rem;
+    font-weight: bold;
+    border-bottom: 3px solid #ff00cc;
+    animation: neon-glow 2s infinite alternate;
+}
+
+@keyframes neon-glow {
+    from { text-shadow: 0 0 10px #00f2fe, 0 0 20px #ff00cc; }
+    to { text-shadow: 0 0 30px #ff00cc, 0 0 40px #00f2fe; }
+}
+
+.container {
+    max-width: 1100px;
+    margin: 2rem auto;
+    background: rgba(20, 20, 40, 0.85);
+    border-radius: 2rem;
+    box-shadow: 0 8px 40px 0 #ff00cc55;
+    padding: 2rem 3rem;
+    position: relative;
+    border: 2px solid #00f2fe;
+    animation: container-fadein 1.2s cubic-bezier(.68,-0.55,.27,1.55);
+}
+
+@keyframes container-fadein {
+    from { opacity: 0; transform: scale(0.95) translateY(40px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+input, textarea {
+    background: linear-gradient(90deg, #232526 0%, #414345 100%);
+    border: 2px solid #ff00cc;
+    border-radius: 1rem;
+    color: #fff;
+    padding: 0.8rem 1.2rem;
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    outline: none;
+    transition: border 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 12px 0 #ff00cc33;
+}
+input:focus, textarea:focus {
+    border: 2px solid #00f2fe;
+    box-shadow: 0 0 16px 0 #00f2fe99;
+}
+
+button {
+    background: linear-gradient(90deg, #ff00cc 0%, #333399 100%);
+    color: #fff;
+    border: none;
+    border-radius: 1.5rem;
+    padding: 0.9rem 2.2rem;
+    font-size: 1.2rem;
+    font-family: inherit;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    box-shadow: 0 4px 24px 0 #ff00cc55;
+    cursor: pointer;
+    margin: 0.5rem 0;
+    transition: background 0.3s, transform 0.2s, box-shadow 0.3s;
+    position: relative;
+    overflow: hidden;
+}
+button:hover, button:focus {
+    background: linear-gradient(90deg, #00f2fe 0%, #ff00cc 100%);
+    transform: scale(1.07) rotate(-1deg);
+    box-shadow: 0 0 32px 0 #00f2fe99, 0 0 16px 0 #ff00cc99;
+}
+
+/* Futuristic animated border for main game area */
+.game-area {
+    border: 3px solid transparent;
+    border-radius: 2rem;
+    background: linear-gradient(90deg, #232526 0%, #414345 100%);
+    box-shadow: 0 0 40px 0 #00f2fe44, 0 0 80px 0 #ff00cc22;
+    padding: 2rem;
+    margin: 2rem 0;
+    position: relative;
+    z-index: 1;
+    animation: border-anim 2.5s linear infinite;
+}
+
+@keyframes border-anim {
+    0% { box-shadow: 0 0 40px 0 #00f2fe44, 0 0 80px 0 #ff00cc22; }
+    50% { box-shadow: 0 0 80px 0 #ff00cc99, 0 0 40px 0 #00f2fe44; }
+    100% { box-shadow: 0 0 40px 0 #00f2fe44, 0 0 80px 0 #ff00cc22; }
+}
+
+/* Chat box */
+.chat-box {
+    background: rgba(30, 30, 60, 0.95);
+    border-radius: 1.5rem;
+    border: 2px solid #00f2fe;
+    box-shadow: 0 2px 24px 0 #00f2fe55;
+    padding: 1.2rem;
+    max-height: 350px;
+    overflow-y: auto;
+    margin-bottom: 1.5rem;
+    transition: box-shadow 0.3s;
+}
+.chat-box:hover {
+    box-shadow: 0 0 32px 0 #ff00cc99, 0 0 16px 0 #00f2fe99;
+}
+
+.chat-message {
+    margin-bottom: 0.7rem;
+    padding: 0.6rem 1rem;
+    border-radius: 1rem;
+    background: linear-gradient(90deg, #ff00cc22 0%, #00f2fe22 100%);
+    color: #fff;
+    font-size: 1.05rem;
+    position: relative;
+    transition: background 0.3s, transform 0.2s;
+}
+.chat-message:hover {
+    background: linear-gradient(90deg, #00f2fe55 0%, #ff00cc55 100%);
+    transform: scale(1.03);
+}
+
+/* Drawing canvas */
+.canvas-area {
+    background: #181828;
+    border: 2px solid #ff00cc;
+    border-radius: 1.5rem;
+    box-shadow: 0 2px 24px 0 #ff00cc55;
+    margin: 1.5rem 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.3s;
+}
+.canvas-area:hover {
+    box-shadow: 0 0 32px 0 #00f2fe99, 0 0 16px 0 #ff00cc99;
+}
+
+canvas {
+    border-radius: 1rem;
+    box-shadow: 0 0 16px 0 #00f2fe99;
+    background: #fbfbfc;
+    transition: box-shadow 0.3s;
+}
+canvas:hover {
+    box-shadow: 0 0 32px 0 #ff00cc99;
+}
+
+/* User list */
+.user-list {
+    background: rgba(40, 40, 80, 0.95);
+    border-radius: 1.2rem;
+    border: 2px solid #ff00cc;
+    box-shadow: 0 2px 16px 0 #ff00cc55;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    color: #fff;
+    font-size: 1.1rem;
+    transition: box-shadow 0.3s;
+}
+.user-list:hover {
+    box-shadow: 0 0 32px 0 #00f2fe99, 0 0 16px 0 #ff00cc99;
+}
+
+.user-list .user {
+    margin-bottom: 0.5rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: 0.8rem;
+    background: linear-gradient(90deg, #00f2fe22 0%, #ff00cc22 100%);
+    transition: background 0.3s, transform 0.2s;
+}
+.user-list .user:hover {
+    background: linear-gradient(90deg, #ff00cc55 0%, #00f2fe55 100%);
+    transform: scale(1.04);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+    width: 10px;
+    background: #232526;
+}
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(90deg, #00f2fe 0%, #ff00cc 100%);
+    border-radius: 10px;
+}
+
+/* Animations for popups, modals, etc. */
+.modal {
+    background: rgba(20, 20, 40, 0.98);
+    border: 2px solid #00f2fe;
+    border-radius: 2rem;
+    box-shadow: 0 8px 40px 0 #00f2fe55;
+    padding: 2rem 3rem;
+    animation: modal-pop 0.7s cubic-bezier(.68,-0.55,.27,1.55);
+}
+@keyframes modal-pop {
+    from { opacity: 0; transform: scale(0.7) translateY(60px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+/* Futuristic glowing border for focus */
+.glow-focus:focus {
+    box-shadow: 0 0 16px 0 #00f2fe99, 0 0 32px 0 #ff00cc99;
+    border-color: #ff00cc;
+}
+
+/* Add a font for extra futuristic look */
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
