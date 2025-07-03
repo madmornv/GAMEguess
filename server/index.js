@@ -13,18 +13,21 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 
-// Servir frontend
-app.use(express.static(path.join(__dirname, 'client')));
-
+// 🔐 Rutas primero, luego los estáticos
 app.use('/api/auth', authRoutes);
 
+// 🟢 Ruta inicial (login)
 app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'login.html'));
 });
 
+// 🎮 Ruta del juego
 app.get('/index.html', (req, res) => {
   res.sendFile(path.join(__dirname, 'client', 'index.html'));
 });
+
+// 📁 Archivos estáticos (CSS, JS, imágenes, etc.)
+app.use(express.static(path.join(__dirname, 'client')));
 
 const server = http.createServer(app);
 const io = socketIo(server, {
@@ -44,33 +47,27 @@ io.on('connection', (socket) => {
   const user = socket.usuario.username;
   usuarios.push(user);
 
-  // Elegir dibujante si es el primero
   if (!dibujanteActual) {
     dibujanteActual = user;
     palabraSecreta = palabras[Math.floor(Math.random() * palabras.length)];
   }
 
-  // Emitir bienvenida al nuevo
   socket.emit('bienvenida', {
     user,
     dibujante: dibujanteActual,
     palabra: palabraSecreta
   });
 
-  // Emitir a todos los usuarios conectados
   io.emit('usuarios_conectados', usuarios);
 
-  // Dibujo en canvas
   socket.on('dibujo', (data) => {
     socket.broadcast.emit('recibir_dibujo', data);
   });
 
-  // Mensajes de chat
   socket.on('mensaje_chat', (mensaje) => {
     io.emit('mensaje_chat', { usuario: user, mensaje });
   });
 
-  // Adivinanzas recibidas
   socket.on('adivinar', (mensaje) => {
     if (user !== dibujanteActual) {
       const datos = { usuario: user, mensaje };
@@ -83,17 +80,14 @@ io.on('connection', (socket) => {
     }
   });
 
-  // Cuando el dibujante acepta al ganador
   socket.on('ganador', (ganador) => {
     io.emit('fin_ronda', ganador);
-    // Reiniciar juego
     dibujanteActual = '';
     palabraSecreta = '';
     adivinanzasPendientes = [];
     usuarios.length = 0;
   });
 
-  // Manejar desconexión
   socket.on('disconnect', () => {
     const index = usuarios.indexOf(user);
     if (index !== -1) usuarios.splice(index, 1);
@@ -101,6 +95,7 @@ io.on('connection', (socket) => {
   });
 });
 
-server.listen(3000, () => {
-  console.log('🎮 Servidor corriendo en http://localhost:3000');
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`🎮 Servidor corriendo en http://localhost:${PORT}`);
 });
