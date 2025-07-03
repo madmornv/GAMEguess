@@ -16,18 +16,22 @@ app.use(express.json());
 // 🔐 Rutas primero, luego los estáticos
 app.use('/api/auth', authRoutes);
 
+
+// Ajuste: servir archivos desde la carpeta client DENTRO de server
+const clientPath = path.join(__dirname, 'client');
+
 // 🟢 Ruta inicial (login)
 app.get('/', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'login.html'));
+  res.sendFile(path.join(clientPath, 'login.html'));
 });
 
 // 🎮 Ruta del juego
 app.get('/index.html', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'index.html'));
+  res.sendFile(path.join(clientPath, 'index.html'));
 });
 
 // 📁 Archivos estáticos (CSS, JS, imágenes, etc.)
-app.use(express.static(path.join(__dirname, 'client')));
+app.use(express.static(clientPath));
 
 const server = http.createServer(app);
 const io = socketIo(server, {

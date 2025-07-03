@@ -1,4 +1,5 @@
-const socket = io('http://localhost:3000', {
+// Conexión dinámica para producción y local
+const socket = io({
   auth: {
     token: localStorage.getItem('token')
   }
